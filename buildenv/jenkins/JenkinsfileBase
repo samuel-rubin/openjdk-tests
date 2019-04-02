@@ -450,6 +450,10 @@ def addJobDescription() {
 		wrap([$class: 'BuildUser']) {
 			currentBuild.displayName = "#${BUILD_NUMBER} - ${BUILD_USER_EMAIL}"
 		}
+		if (params.CUSTOM_DESCRIPTION){
+			def description = (currentBuild.description) ?  "<br>" + currentBuild.description : ""
+			currentBuild.description = params.CUSTOM_DESCRIPTION + description
+		}
 	}
 
 	def description = (currentBuild.description) ? currentBuild.description + "<br>" : ""
